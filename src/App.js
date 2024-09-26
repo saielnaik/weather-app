@@ -15,7 +15,7 @@ function App() {
   const getWeather = (e) => {
     e.preventDefault();
     const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    fetch(`http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1&aqi=no&alerts=no`)      
+    fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&days=1&aqi=no&alerts=no`)      
     .then((res) => {
         if (!res.ok) {
           throw new Error('City not found');
