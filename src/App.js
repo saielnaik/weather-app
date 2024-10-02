@@ -14,7 +14,6 @@ function App() {
 
   const getWeather = (e) => {
     e.preventDefault();
-    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     fetch(`http://api.weatherapi.com/v1/forecast.json?key=9994df17ffcf4db490d103038242609&q=${city}&days=1&aqi=no&alerts=no`)      
     .then((res) => {
         if (!res.ok) {
