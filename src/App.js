@@ -9,18 +9,19 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState(''); 
 
+
   const handleClick = () => {
     setShowInput(!showInput);
   };
 
   const getWeather = async (e) => {
+    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     e.preventDefault();
       try {
         const response = await axios.get(
-            `http://api.weatherapi.com/v1/forecast.json?key=9994df17ffcf4db490d103038242609&q=${city}&days=1&aqi=no&alerts=no`
+            `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1&aqi=no&alerts=no`
         );
         setWeather(response.data);
-        console.log(response.data)
         setErrorMessage('');
     } catch (error) {
         console.error("Error fetching suggestions:", error);
