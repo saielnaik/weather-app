@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   
@@ -12,23 +13,19 @@ function App() {
     setShowInput(!showInput);
   };
 
-  const getWeather = (e) => {
+  const getWeather = async (e) => {
     e.preventDefault();
-    fetch(`http://api.weatherapi.com/v1/forecast.json?key=9994df17ffcf4db490d103038242609&q=${city}&days=1&aqi=no&alerts=no`)      
-    .then((res) => {
-        if (!res.ok) {
-          throw new Error('City not found');
-        }
-        return res.json();
-      })
-      .then((finalres) => {
-        setWeather(finalres);
-        setErrorMessage(''); 
-      })
-      .catch((error) => {
-        console.log(error);
+      try {
+        const response = await axios.get(
+            `http://api.weatherapi.com/v1/forecast.json?key=9994df17ffcf4db490d103038242609&q=${city}&days=1&aqi=no&alerts=no`
+        );
+        setWeather(response.data);
+        console.log(response.data)
+        setErrorMessage('');
+    } catch (error) {
+        console.error("Error fetching suggestions:", error);
         setErrorMessage('City not found. Please enter a valid city name.'); 
-      });
+    }
     setShowInput(!showInput);
   };
 
